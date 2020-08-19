@@ -7,7 +7,7 @@ An object literal is a container that we can fill with properties
 **key - value pair**
 
 **Initializing an object using object literal**
-```json
+```js
 var john = {
     firstName: 'John',
     lastName: 'Smith',

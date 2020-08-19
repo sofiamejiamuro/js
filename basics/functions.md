@@ -14,7 +14,7 @@
 
 It is not stored
 
-Consturtor functions
+Constuctor functions
 
 
 ```js

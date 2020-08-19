@@ -2,7 +2,7 @@
 
 Collections
 
-// Initialize new array
+Initialize new array
 
 Different ways to create an array 
 ```js

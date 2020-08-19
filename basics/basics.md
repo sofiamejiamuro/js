@@ -117,7 +117,7 @@ Allow us to take decitions using code
 
 () if else 
 
-{} if else 
+() if else 
 
 ...
 
@@ -206,7 +206,7 @@ switch (true) {
 
 Falsy value: undefined, null, 0, '', NaN. All of them became false when evaluated in a if statement, are falsy because they are not false per se, they became false.
 
-Truthy valau: NOT falsy values
+Truthy value: NOT falsy values
 
 ```js
 var height;
