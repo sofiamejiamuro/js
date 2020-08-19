@@ -1,0 +1,65 @@
+# Arrays
+
+Collections
+
+// Initialize new array
+
+Different ways to create an array 
+```js
+var names = ['John', 'Mark', 'Jane'];
+var years = new Array(1990, 1969, 1948);
+
+// Access to the items of an array
+console.log(names[2]);
+console.log(names.length);
+```
+
+**Mutate the data**
+```js
+names[1] = 'Ben';
+```
+Now on postition 1 the value 'Ben' replaced 'Mark'
+```js
+names = ['John', 'Ben', 'Jane'];
+```
+```js
+names[5] = 'Maria';
+```
+```js
+names = ['John', 'Ben', 'Jane',empty x 2,'Maria'];
+```
+
+An array can store different data types items
+
+```js
+var john = ['John', 'Smith', 1990, 'designer', false];
+```
+
+**Methods specific to arrays**
+
+.push() **adds** an element at the **end** of the array
+```js
+john.push('blue');
+```
+.unshift() **adds** an element at the **beginning** of the array
+```js
+john.unshift('Mr.');
+```
+.pop() **removes** the element from the **end** of the array
+```js
+john.pop();
+```
+.unshift() **removes** the element from the **beginning** of the array
+```js
+john.shift();
+```
+.indexOf(item) will tell us in which **position** the inside parenthesis element is
+```js
+cosole.log(john.indexOf(1990)) // 2
+```
+If we pass to the method an element that it is not part of the array it will return a -1
+ 
+```js
+var isDesigner = john.indexOf('designer') === -1 ? 'John is NOT a designer' : 'John IS a designer';
+console.log(isDesigner);
+```
