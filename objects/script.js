@@ -85,8 +85,9 @@ var a = 23;
 var b = a;
 a = 46;
 console.log(a); // 46
-console.log(b); // 23
 
+console.log(b); // 23
+// b did not change the value when a canged below
 
 // Objects
 var obj1 = {
@@ -97,9 +98,12 @@ var obj1 = {
 var obj2 = obj1;
 obj1.age = 30;
 console.log(obj1.age); // 30
-console.log(obj2.age); // 30
+console.log(obj2.age); // 30 here we would expect 26
 
-// No copy was created, both hold a reference that points to the same object in the memory
+// we did not create a new object2, No copy was created, both hold a reference that points to the same object in the memory
+
+
+
 
 // Functions work exactly the same way as object
 
@@ -117,7 +121,7 @@ function change(a, b) {
 
 change(age, obj);
 
-console.log(age);
-console.log(obj.city);
+console.log(age);      // 27 
+console.log(obj.city); // San Francisco
 
 

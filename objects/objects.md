@@ -167,4 +167,6 @@ var jane = Object.create(personProto, {
 
 ## Primitives vs Objects
 
-A variable containing aan primitive stores them itselft unlike those containing objects that contain a reference to the memory where it's store, that is , points to it 
+A variable containing a primitive stores them itself unlike those containing objects that contain a reference to the memory where it's store, that is , points to it 
+
+## Functions
