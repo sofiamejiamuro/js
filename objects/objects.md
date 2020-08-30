@@ -167,6 +167,53 @@ var jane = Object.create(personProto, {
 
 ## Primitives vs Objects
 
-A variable containing a primitive stores them itself unlike those containing objects that contain a reference to the memory where it's store, that is , points to it 
+A variable containing a primitive stores the primitive itself unlike those variables containing objects that contain a reference to the memory where the object is stored, that is , the variable points to it 
 
-## Functions
+**Primitives**
+```js
+var a = 23;
+var b = a;
+a = 46;
+console.log(a); // 46
+console.log(b); // 23
+
+// b did not change the value when a changed below
+```
+
+**Objects**
+```js
+var obj1 = {
+  name: 'John',
+  age: 26
+};
+
+var obj2 = obj1;
+obj1.age = 30;
+console.log(obj1.age); // 30
+console.log(obj2.age); // 30 here we would expect 26
+
+// we did not create a new object2, No copy was created, both hold a reference that points to the same object in the memory
+
+```
+**Functions**
+
+Functions work the same as objects
+```js
+var age = 27;
+var obj = {
+    name: 'Jonas',
+    city: 'Lisbon'
+};
+
+function change(a, b) {
+    a = 30;
+    b.city = 'San Francisco';
+}
+
+change(age, obj);
+console.log(age);      // 27 
+console.log(obj.city); // San Francisco 
+// San Francisco because we are pointing to the same object in memory
+
+
+```

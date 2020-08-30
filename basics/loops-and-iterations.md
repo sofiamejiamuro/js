@@ -19,8 +19,9 @@ for (var i = 0; i <= 10; i++) {
 
 var john = ['John', 'Smith', 1990, 'designer', false, 'blue'];
 for (var i = 0; i < john.length; i++) {
-    console.log(john[i]); 
-    // Jonh at postiion i e.g. if i = 2, print position 2 of array, that is, 1990 
+       console.log(john[i]); 
+    // console.log( Jonh at postion i) 
+    // e.g. if i = 2, print position 2 of array, that is, 1990 
 
     // i = 0, 0 < 6 true, Jonh, i++
     // i = 1, 1 < 6 true, Smith, i++
