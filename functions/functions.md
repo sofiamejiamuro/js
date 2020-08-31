@@ -231,3 +231,127 @@ interviewQuestion('developer')('Sofia');
 ![how closures work](assets/images/how-closures-work.png)
 
 *This image belongs to  [The Complete Javascript Course 2020](https://www.udemy.com/share/101WfeBksSdFlTQHQ=/) by **Jonas Shmedtmann***
+
+
+## BIND, CALL AND APPLY METHODS
+
+```js
+var john = {
+  name: 'John',
+  age: 26,
+  job: 'teacher',
+  presentation: function(style, timeOfDay) {
+      if (style === 'formal') {
+          console.log('Good ' + timeOfDay + ', Ladies and gentlemen! I\'m ' +  this.name + ', I\'m a ' + this.job + ' and I\'m ' + this.age + ' years old.');
+      } else if (style === 'friendly') {
+          console.log('Hey! What\'s up? I\'m ' +  this.name + ', I\'m a ' + this.job + ' and I\'m ' + this.age + ' years old. Have a nice ' + timeOfDay + '.');
+      }
+  }
+};
+```
+### Calling presentation method
+```js
+john.presentation('formal','konbanwa!');
+```
+
+```js
+var emily = {
+  name: 'Emily',
+  age: 35,
+  job: 'designer'
+};
+```
+
+Suppose we want to use the presentacion method on emily object, we can use the **call** method, it accepts three arguments
+
+This is called method borrowing 
+
+e.g. John's presentation method
+```js
+presentation: function(style, timeOfDay){}
+```
+
+```js
+john.presentation.call(emily,'friendly','konnichiwa!');
+
+// 1º arguments always is 'this' = emily
+// 2º argument = 'friendly'
+// 3º argument = 'konnichiwa'  
+```
+### Apply method
+Apply method, accepts the arguments 'this' + []
+
+This example won't work beacuse the function is not accepting an array as a parameter
+```js
+john.presentation.apply(emily,['friendly','konnichiwa!']);
+```
+
+### Bind method
+
+Bind 'enlazar'/'atar' method is similar to the call ome, as the other two methods the first argument sets the 'this' variable explicitly.
+
+**Does not immediatly call the function** instead makes a copy and stores it **preseting some arguments**.
+
+```js
+var johnFriendly = john.presentation.bind(john, 'friendly');
+```
+Now we are calling the function with one argument preseted and passing the second one
+
+```js
+johnFriendly('morning');
+johnFriendly('night');
+```
+```js
+var emilyFormal = john.presentation.bind(emily, 'formal');
+emilyFormal('afternoon');
+```
+
+**Carrying** is to create a function based in another fuction but with preset parameters
+(we are carrying using the bind method)
+
+Another cool example
+```js
+var years = [1990, 1965, 1937, 2005, 1998];
+```
+
+```js
+function arrayCalc(arr, fn) {
+    var arrRes = [];
+    for (var i = 0; i < arr.length; i++) {
+        arrRes.push(fn(arr[i]));
+    }
+    return arrRes;
+}
+
+function calculateAge(el) {
+    return 2016 - el;
+}
+
+function isFullAge(limit, el) {
+    return el >= limit;
+}
+```
+
+```js
+var ages = arrayCalc(years, calculateAge);
+/* 1º argument = [1990, 1965, 1937, 2005, 1998]
+   2º argument = calculateAge(el) {
+                  return 2020 - el;
+                }
+  fn(arr[i])             
+*/
+
+console.log(ages) // [ 30, 55, 83, 15, 22 ];
+```
+As in arrayCalc function the function passed only accept one argument and is fullAge needs to throug .bind() we are **presetting** the frist one
+```js
+var fullJapan = arrayCalc(ages, isFullAge.bind(this, 20));
+/* 1º argument = [1990, 1965, 1937, 2005, 1998]
+   2º argument = isFullAge(limit, el) {
+                   return el >= limit;
+                }
+   fn(arr[i])             
+*/
+console.log(fullJapan); // [ true, true, true, false, true ]
+
+```

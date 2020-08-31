@@ -96,7 +96,7 @@ game();
 
 // How many years leaft until rtirement
 
-function retirement(retirementAge) {
+/* function retirement(retirementAge) {
   var a = ' years left until retirement.';
   return function(yearOfBirth) {
       var age = 2020 - yearOfBirth;
@@ -175,3 +175,82 @@ interviewQuestion('teacher')('John');
 interviewQuestion('designer')('Mark');
 
 interviewQuestion('developer')('Sofia');
+
+
+ */
+
+// BIND, CALL AND APPLY 
+/* var john = {
+  name: 'John',
+  age: 26,
+  job: 'teacher',
+  presentation: function(style, timeOfDay) {
+      if (style === 'formal') {
+          console.log('Good ' + timeOfDay + ', Ladies and gentlemen! I\'m ' +  this.name + ', I\'m a ' + this.job + ' and I\'m ' + this.age + ' years old.');
+      } else if (style === 'friendly') {
+          console.log('Hey! What\'s up? I\'m ' +  this.name + ', I\'m a ' + this.job + ' and I\'m ' + this.age + ' years old. Have a nice ' + timeOfDay + '.');
+      }
+  }
+};
+
+
+var emily = {
+  name: 'Emily',
+  age: 35,
+  job: 'designer'
+};
+// suppose we want to use the presentacion method ond emily object, we can use the call method, it accepts three arguments
+//this is called method borrowing 
+john.presentation.call(emily,'friendly','konnichiwa!');
+
+
+console.log(john.presentation);
+john.presentation('formal','konbanwa!');
+
+// apply method, accepts the arguments as an array , 2 arguments
+// In this exaple this wont work beacuse the function is not accepting an array
+//john.presentation.apply(emily,['friendly','konnichiwa!']);
+
+//bind 'enlazar'/'atar' method; similar to the call, as the other two methods the first argument  sets the this variable explicitly
+// does not inmmediatly call the functios intead make a copy and stores it 
+// preset some arguments
+// carrying : create a function based in another fuction but with preset parameters
+var johnFriendly = john.presentation.bind(john, 'friendly');
+
+console.log(johnFriendly);
+johnFriendly('morning');
+johnFriendly('night');
+
+var emilyFormal = john.presentation.bind(emily, 'formal');
+emilyFormal('afternoon');
+
+ */
+
+// Another cool example
+var years = [1990, 1965, 1937, 2005, 1998];
+
+function arrayCalc(arr, fn) {
+    var arrRes = [];
+    for (var i = 0; i < arr.length; i++) {
+        arrRes.push(fn(arr[i]));
+    }
+    return arrRes;
+}
+
+function calculateAge(el) {
+    return 2020 - el;
+}
+
+function isFullAge(limit, el) {
+    return el >= limit;
+}
+
+// caalcula las edades
+var ages = arrayCalc(years, calculateAge);
+
+console.log(ages);
+ // Here we are preseting the aargument
+var fullJapan = arrayCalc(ages, isFullAge.bind(this, 20));
+
+console.log(fullJapan); 
+
