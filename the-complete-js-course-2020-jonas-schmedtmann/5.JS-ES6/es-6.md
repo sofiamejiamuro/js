@@ -2,127 +2,145 @@
 
 ## LET AND CONST
 
-
-// function scope 
+**ES5** function scope 
+```js
 var name5 = 'sofia mejia';
 var age5 = 23;
-
 name5 = 'sofia muro';
+console.log(name5); // sofia muro
+```
 
-//console.log(name5);
+**ES6** block scope
 
-
-// block scope
-
-// const are inmmutably 
+const are immutable
+```js
 const name6 = 'sofia mejia';
 let age6 = 23;
-//name6 = 'sofia muro';
-//console.log(name6);
+name6 = 'sofia muro';
+console.log(name6); // error 
+```
 
-// ES5 
+## FUNCTIONS
+
+**ES5**
+```js 
 function driversLicence5(passedTest) {
+  console.log(firstName) // undefined
   if (passedTest) {
     var firstName = 'John';
     var yearOfBirth = 1990;
   }
-
+  // It is possible to read the varibles outside the if but not ourside the function
   console.log(firstName + ', born in ' + yearOfBirth + ', is now officially allowed to drive a car.');
 }
-// var is function scope so console lod does not work here
+console.log(firstName + ', born in ' + yearOfBirth + ', is now officially allowed to drive a car.');  // error
+// var is function scope so console.log does not work here
+
 driversLicence5(true);
+```
 
-// ES&
-
+**ES&**
+```js
 function driversLicence6(passedTest) {
-  //console.log(firstName);
-
+  console.log(firstName); // does not work unlike es5 var that return a undefined
+  // As let and const are block scope if we want to use them out of the block scope we need to declare them and defined( in the case of const) outside the scope
   let firstName;
   const yearOfBirth = 1990;
 
   if (passedTest) {
     firstName = 'jonh'
-  /*   let firstName;
-    const yearOfBirth = 1990;
-   */
-  console.log(firstName + ', born in ' + yearOfBirth + ', is now officially allowed to drive a car.');
+
+    // These let and const as they are declared aand defined inside they can not be used outside the scope
+    let firstNameInside;
+    const yearOfBirthInside = 1990;
+    console.log(firstNameInside + ', born in ' + yearOfBirthInside + ', is now officially allowed to drive a car.');
   }
-  // console.log does not work here beacuse let and const are block scope 
-  // in order to use them we neet to declare de variables ouside an defined and it will only work for let 
+  
+  // firstNameInside && yearOfBirthInside  does not work because block scope
+  console.log(firstNameInside + ', born in ' + yearOfBirthInside + ', is now officially allowed to drive a car.');
+
+  // This work because the variables were declaare and define outisde
+  console.log(firstName + ', born in ' + yearOfBirth + ', is now officially allowed to drive a car.');
 }
 
-// cosole.log would work here neither
+//  Would not work here neither inside function or inside block
+cosole.log()
 
 driversLicence6(true);
+```
 
-// In ES6 a varible called before its declaration gave back 'undefined' but in ES& it is not even possible to use them 
-// Uncaugh erro : x is not defined, the variabels are hpisted as well as in es5 but it it not possible to access to them
+In ES5 a varible called before its declaration gave back 'undefined' but in ES6 it is not even possible to use them. 
 
+>> Uncaugh error : x is not defined
+
+The variables are hoisted as well as in es5 but it it not possible to access to them
+
+```js
 let i = 23;
 
 for (let i = 0; i < 5; i++) {
-    console.log(i);
+  // this work here due to block scope and 'i' is differetnt to 'i' outside
+    console.log(i); 
+    // 1
+    // 2
+    // 3
+    // 4
+    // 5 
 }
 
-// let i = 24  // error of redeclartion
+let i = 24  
+console.log(i) // error of redeclartion
+```
 
-console.log(i);
-// 0 
-// 1 
-// 2 
-// 3 
-// 4 
-// 23
-
+```js
 var i = 23;
 
 for (var i = 0; i < 5; i++) {
     console.log(i);
 }
 
-
+// As var is function scope here 'i' receive a new value
 console.log(i);
 // 0 
 // 1 
 // 2 
 // 3 
 // 4 
-// 23
+// 5
+```
 
 ## BLOCKS AND IIFIS
 
-In ES6 they waay to create daata privacy is ising blocks of code, as in es5 iifis
+In **ES6** they way to create data privacy is uising blocks of code, as in es5 iifis
 
-That`s a block
+```js
+This is a block
 {} 
 
-
-
-
-
-// ES6 block 
 {
   const a = 1;
   let b =2;
   var c = 3;
 }
-
-
-// ES5 iifes
+```
+**ES5** iifes
+```js
 (function () {
   var a = 1;
   var b =2;
   var c = 5;
 })();
 
-// TThis values are not acceced from the outside as in a iife
+// This values are not acceced from the outside as in a iife, neither ES6 or ES5
 console.log(a + b);
-console.log(c); // 3 Beacuse var si fucntion scope not block scope
+
+// This works on ES6 because var is not block scope
+console.log(c); // 3
+```
 
 
-
-## strings
-
+## STRINGS
+```js
 let firstName = 'John';
 let lastName = 'Smith';
 const yearOfBirth = 1990;
@@ -130,191 +148,196 @@ const yearOfBirth = 1990;
 function calcAge(year) {
   return 2020 - year;
 }
+```
 
-// ES5
+**ES5**
+```js
 console.log('This is ' + firstName + ' ' + lastName + '. He was born in ' + yearOfBirth + '. Today, he is ' + calcAge(yearOfBirth) + ' years old.');
+```
 
-// Template literals `` --> we want to use a tempalte literal  ${} --> inside variables, call functions
-// ES6
+**Template literals** `` --> we want to use a tempalte literal  ${} --> inside variables, call functions
+**ES6**
+```js
 console.log(`This is ${firstName} ${lastName}. He was born in ${yearOfBirth}. Today, he is ${calcAge(yearOfBirth)} years old.`);
+```
 
-// new string methods
+New string methods
+```js
 const n = `${firstName} ${lastName}`;
-// this three methods return a boolean, it is case sesitive
-console.log(n.startsWith('j'));
-console.log(n.startsWith('J'));
-console.log(n.endsWith('Sm'));
-console.log(n.includes('oh'));
+```
+This three methods return a boolean, it is case sesitive
+```js
+console.log(n.startsWith('j')); // false
+console.log(n.startsWith('J')); // true
+console.log(n.endsWith('Sm'));  // true
+console.log(n.includes('oh'));  // true
 
+console.log(`${firstName} `.repeat(3)); // John John John
+console.log(firstName.repeat(3)); // JohnJohnJohn
+```
 
-console.log(`${firstName} `.repeat(5));
-console.log(firstName.repeat(5));
-
-## arrow functions
-
-/// arrow functions
-
-const years = [1990, 1965, 1982, 1937];
-
-/////  ES5  /////
+## Arrow functions
+```js
+const years = [1990, 1965, 1982, 1992];
+```
+**ES5**
+```js
 //  map method returns a new array , map(current, index, array)
 var ages5 = years.map(function(el) {
   return 2020 - el;
 });
-console.log(ages5);
+console.log(ages5); // [30, 55, 38, 28]
+```
 
-/////  ES6  /////
-// with one argument and one line, no curly brances and implict return
+**ES6**
+```js
+// With one argument and one line --> no curly brances and implict return
 let ages6 = years.map(el => 2020 - el);
 console.log(ages6);
 
-// more than one arguement aand one line, no curly braces and implicit return 
+// More than one arguement and one line --> parenthesis for arguments, no curly braces and implicit return 
 ages6 = years.map((el, index) => `Age element ${index + 1}: ${2020 - el} yo.`);
 console.log(ages6);
 
-// More than one line in the return, curly braces and explicit return 
+// More than one line in the return --> curly braces and explicit return 
 ages6 = years.map((el, index) => {
   const now = new Date().getFullYear();
   const age = now - el;
   return `Age element ${index + 1}: ${age}.`
 });
-console.log(ages6);
+```
 
+**ES5**
 
-
-
-// ES5
+```js
 var box5 = {
   color: 'green',
   position: 1,
   clickMe: function() {
-   
-    // Create a new vriable to store 'this' and be able to use it inside the function callback
+  // the following console.log refers to the object where the method clickMe was created, that is box5
+   console.log(this); 
+   //clickMe: function clickMe()
+   //color: "green"
+   //position: 1
+
+    // Create a new variable to storing 'this' refering to the box5 obejct and be able to use it inside the function callback
     var self = this;  
-    //this do work
-    console.log(this.color); // green
+    //Now this stores the object and can be accessed inside the callback funtion
     console.log(self); // Object { color: "green", position: 1, clickMe: clickMe() }
 
     document.querySelector('.green').addEventListener('click', function() {
+      // This str wont work becausee the callback function creates a new scope so 'this' referes to the global object
       // var str = 'This is box number ' + this.position + ' and it is ' + this.color;
       // Now it works!
       var str = 'This is box number ' + self.position + ' and it is ' + self.color;
       alert(str);
-      // This is box number undefined and it is undefined
-      // this in a normal function(in this case the callback, beacuse clcik me is amethod, there this works) do not work, is in amethod, thats why, here this is pointing to wiondow object
     });
   }
 }
-//box5.clickMe();
+box5.clickMe();
+```
 
-// ES6
+**ES6**
+```js
 const box6 = {
   color: 'green',
   position: 1,
   clickMe: function() {
-    // We aare usign an arrow function '() => {}' instead of a 'function(){}'
-    // changing to arow function share this with their surroundings
+    // We are usign an arrow function '() => {}' instead of a 'function(){}' , both work as a callback function
+    // Changing to arrow function share 'this' with their surroundings
     document.querySelector('.green').addEventListener('click', () => {
         var str = 'This is box number ' + this.position + ' and it is ' + this.color;
         alert(str);
     });
   }
-}
-//box6.clickMe();
-
-// ES6
-/* 
-  const box66 = {
-  color: 'green',
-  position: 1,
+  /*
+  If we change the method to a arrow function, when using this we will refer to the window object, beacause arrow functions 'share' 
+  the 'this' with theyr surroundings, that's why it is kept it as a ES5 function
   clickMe: () => {
-    // changing this method from es5 fucntiomn to arrow functions alñlow to share the thiis with the upper object, in this case the window object
     console.log(this); // window object
     console.log(this.box5); // remeber why you can only retireve box5 
-    // We aare usign an arrow function '() => {}' instead of a 'function(){}'
-    // changing to arow function share this with their surroundings
-    document.querySelector('.green').addEventListener('click', () => {
-        var str = 'This is box number ' + this.position + ' and it is ' + this.color;
-        alert(str);
-    });
   }
+  */
 }
-box66.clickMe();
-*/
+box6.clickMe();
+```
 
-// ES5
-/*
-  var Person = function(name) {
-  // this.name is the name we want the parameter to have = name that is the parameter we are passing to the function
-  this.name = name;
 
-}*/
-
-// ES6
-function Person(name) {
+```js
+var Person = function(name) {
   this.name = name;
 }
-
-// ES5
+```
+**ES5**
+```js
 Person.prototype.myFriends5 = function(friends) {
   var arr = friends.map(function(el) {
      return this.name + ' is friends with ' + el; 
-
-  }.bind(this));
+  });
+  // console.log(arr); // " is friends with Mark" 
+  // Can not access to this.name for the same reasons mentioned above, we are creating a new scope with the map function.
   
-  //console.log(arr); // " is friends with Mark" Can not access to this.name for the same reasons mentioned above, in order to fix this we can use the bind method
-  // Onve we use the bind method crete the copy of the fucntion
+  // In order to fix this we can use the bind method, we are passing as an argument 'this' and create a copy
+  var arr = friends.map(function(el) {
+     return this.name + ' is friends with ' + el; 
+  }.bind(this));
 }
 
 var friends = ['Bob', 'Jane', 'Mark'];
 new Person('John').myFriends5(friends);
-
-// ES6
+```
+**ES6**
+```js
 Person.prototype.myFriends6 = function(friends) {
-
+  // There is no need of bind method because arrow functions allow the use the superior this
   let arr = friends.map(el => `${this.name} is friends with ${el}`);
-
   console.log(arr); // "Mike is friends with Bob"
-
 }
-
 new Person('Mike').myFriends6(friends);
-
+```
 
 ## Destructuring
 
-// extract data from an object or an array
+Extract data from an object or an array
 
-// Destrucuring
-// ES5
+### ARRAYS
+
+**ES5**
+```js
 var john = ['John', 26];
-
-// store each element in a single variable, what would happen if we needed to store a lot or elements, say 10
-/* var name = john[0];
+```
+Store each element in a single variable, what would happen if we needed to store a lot of elements, say 10.
+```js
+var name = john[0];
 var age = john[1];
- */
-
-// ES6
+```
+**ES6**
+```js
 const [name, age] = ['John', 26];
 console.log(name);
 console.log(age);
+```
 
+### OBJECTS
+**ES6**
+```js
 const obj = {
   firstName: 'John',
   lastName: 'Smith'
 };
 
+// Names must be the same
 const {firstName, lastName} = obj;
 console.log(firstName);
 console.log(lastName);
 
-// I f we dont want the name to match with the keys of th eobject
+// If we don't want the name to match with the keys of the object
 const {firstName: a, lastName: b} = obj;
 console.log(a);
 console.log(b);
-
-// reutnr multiple values from a function using destructuring
-
+```
+Return multiple values from a function usign destructuring
+```js
 function calcAgeRetirement(year) {
   const age = new Date().getFullYear() - year;
   return [age, 65 - age];
@@ -323,6 +346,6 @@ function calcAgeRetirement(year) {
 const [age2, retirement] = calcAgeRetirement(1990);
 console.log(age2);
 console.log(retirement);
-
+```
 
 ## Arrays in ES6
