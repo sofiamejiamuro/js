@@ -1,26 +1,33 @@
-var box5 = {
-  color: 'green',
-  position: 1,
-  clickMe: function() {
-  // the following console.log refers to the object itself
-   console.log(this); 
-   //clickMe: function clickMe()
-   //color: "green"
-   //position: 1
-    
-    var self = this;  
-    //this do work
-    
-    //console.log(self); // Object { color: "green", position: 1, clickMe: clickMe() }
+// DEafult parameters when we want to preset the value of a parameter
 
-    document.querySelector('.green').addEventListener('click', function() {
-      //var str = 'This is box number ' + this.position + ' and it is ' + this.color;
-      // Now it works!
-      var str = 'This is box number ' + self.position + ' and it is ' + self.color;
-      alert(str); 
-      // This is box number undefined and it is undefined
-      // this in a normal function(in this case the callback, beacuse clcik me is amethod, there this works) do not work, is in amethod, thats why, here this is pointing to wiondow object
-    });
-  }
+// ES5
+function SmithPerson(firstName, yearOfBirth, lastName, nationality) {
+    
+    lastName === undefined ? lastName = 'Smith' : lastName = lastName;
+    nationality === undefined ? nationality = 'american' : nationality = nationality; 
+    
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.yearOfBirth = yearOfBirth;
+    this.nationality = nationality;
+
 }
-box5.clickMe();
+
+var john = new SmithPerson('John', 1990);
+// we are oinly specifing 2 values of the object, so when we console tthe jonh object the resutl will be that the nod defined values will be 'undefined'
+console.log(john);
+
+// we cana stablish the values inside the object constructor as above
+var emily = new SmithPerson('Emily', 1983, 'Diaz', 'spanish');
+console.log(emily);
+
+// ES6 Values are passed in the parameters
+function SmithPerson(firstName, yearOfBirth, lastName = 'Smith', nationality = 'american') {
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.yearOfBirth = yearOfBirth;
+    this.nationality = nationality;
+}
+
+var mark = new SmithPerson('Mark', 1990);
+console.log(mark);
