@@ -351,109 +351,143 @@ console.log(retirement);
 
 ## Arrays in ES6
 
+Remember that when use **querySelectorAll()** method it returns a list of node elements
+
+So we need to transform this list into an array in order to apply to them array methods.
+
+```js
+const boxes = document.querySelectorAll('.box');
+console.log(boxes);
+```
+
+![node list](assets/images/node-list.png)
 
 
-// Lecture: Arrays
-
-// Remember that when use querySelectorAll() method it returns a list od node elements
-// so we need to tranform this list into an array
-// here paste  the consolege screenshots
- const boxes = document.querySelectorAll('.box');
-//console.log(boxes);
-
-
-//ES5
+**ES5**
+```js
  var boxesArr5 = Array.prototype.slice.call(boxes);
-//console.log(boxesArr5);
+ console.log(boxesArr5);
+ ```
 
-/*boxesArr5.forEach(function(cur) {
+![node list](assets/images/node-list-vs-array.png)
+
+```js
+boxesArr5.forEach(function(cur) {
     cur.style.backgroundColor = 'dodgerblue';
-}); */
- 
-//ES6
-// Array.from(boxes) trnaform the node list into an array
+});
+```
+**ES6**
+
+In ES6 we use the method Array.from(the thing we want to tranform into an array)
+
+```js
 const boxesArr6 = Array.from(boxes);
 boxesArr6.forEach(cur => cur.style.backgroundColor = 'dodgerblue');
+console.log(boxesArr6);  
+```
 
-//console.log(boxesArr6); 
- 
+## LOOPS
 
-// LOOPS
+**ES5**
 
-//ES5
-
-/* for(var i = 0; i < boxesArr5.length; i++) {
-    
-    if(boxesArr5[i].className === 'box blue') {
-        continue;
-    }
-    // remember break and continue
-    boxesArr5[i].textContent = 'I changed to blue!';    
-    
-} */
-
-// in ES6 new loop 'for of'
-// includes() returns boolean
-for (const box of boxesArr6) {
-    if (box.className.includes('blue')) {
-        continue;
-    }
-    box.textContent = 'I changed to blue in ES6!';
+```js
+for(var i = 0; i < boxesArr5.length; i++) {  
+  if(boxesArr5[i].className === 'box blue') {
+      continue;
+  }
+  // remember break and continue
+  boxesArr5[i].textContent = 'I changed to blue!';    
 }
+```
 
-// New array methods
-//ES5
+**ES6**
+
+In ES6 new loop **'for of'**, less code is written
+
+method includes() returns boolean
+
+```js
+for (const box of boxesArr6) {
+  if (box.className.includes('blue')) {
+      continue;
+  }
+  box.textContent = 'I changed to blue in ES6!';
+}
+```
+
+### New array methods
+
+**ES5**
+```js
 var ages = [12, 17, 8, 21, 14, 11];
 var full = ages.map(function(cur) {
     return cur >= 18;
 });
-console.log(full);
-console.log(full.indexOf(true));
-console.log(ages[full.indexOf(true)]);
 
-//ES6 
-// findIndex method accepts a callback function returning true, the argument can be the three as aaa map 
-console.log(ages.findIndex(cur => cur >= 18));
-// Retriebe the value
-console.log(ages.find(cur => cur >= 18));
+console.log(full); // [ false, false, false, true, false, false ]
+console.log(full.indexOf(true)); // 3
+console.log(ages[full.indexOf(true)]); // 21
+```
+
+**ES6** 
+
+findIndex() method accepts a callback function returning true, the arguments can be the three as in map ()
+
+```js
+// ES5 console.log(full.indexOf(true)); // 3
+console.log(ages.findIndex(cur => cur >= 18)); // 3
+// ES5 console.log(ages[full.indexOf(true)]); // 21
+console.log(ages.find(cur => cur >= 18)); // 21
 
 // Both methods work as well with strings
 var strArr = ['hola', 'mundo'];
-console.log(strArr.findIndex(cur => cur === 'mundo'));
-console.log(strArr.find(cur => cur === 'mundo'));
+console.log(strArr.findIndex(cur => cur === 'mundo')); // 1
+console.log(strArr.find(cur => cur === 'mundo')); // mundo
+```
 
+## NEW OPERATOR IN JS SPREAD/dispersar to expand elements 
 
-
-// NEW OPERATOR IN JS SPREAD&/dispersar to expand elements 
-
+```js
 function addFourAges (a, b, c, d) {
     return a + b + c + d;
 }
 
 var sum1 = addFourAges(18, 30, 12, 21);
 console.log(sum1); // 81
+```
 
-//ES5 
-// if instead of passig one by one the ages and we have it in an array , how can we pass the ages as an argument?
+**ES5**
+If instead of passig one by one the ages and we have it in an array , how can we pass the ages as an argument?
+```js
 var ages = [18, 30, 12, 21];
+```
 
-// applu method use the element of the array as the functoin arguments
+Appl() method use the element of the array as the function arguments
+```js
+// null as replacing 'this'
 var sum2 = addFourAges.apply(null, ages);
 console.log(sum2); // 81
+```
 
-//ES6
-// ... take the things out the array into its components , so there is no neeed of apply
+**ES6**
+
+... take the things out the array into each individual element , so there is no neeed of apply()
+```js
 const sum3 = addFourAges(...ages);
-console.log(sum3); // 81
 console.log(...ages);  // 18 30 12 21
+console.log(sum3); // 81
+```
 
-//to join the arrays
+... spread operator can also be used to join arrays
+```js
 const familySmith = ['John', 'Jane', 'Mark'];
 const familyMiller = ['Mary', 'Bob', 'Ann'];
 const bigFamily = [...familySmith, 'Lily', ...familyMiller];
-console.log(bigFamily);
+console.log(bigFamily); // ['John', 'Jane', 'Mark', 'Lyli','Mary', 'Bob', 'Ann']
+```
 
-// we can use ... not only on arrays also in nodelists
+ ... spread operator can be used not only on arrays also in node lists
+ ```js
 const h = document.querySelector('h1');
 const boxes = document.querySelectorAll('.box');
 console.log(h); // <h1>
@@ -465,27 +499,23 @@ console.log(all);
 all.forEach(cur => cur.style.background = 'pink');
 // As it is already an array we don not need to change it 
 Array.from(all).forEach(cur => cur.style.color = 'purple');
+```
+
+## FUNCTION PARAMETERS 
+### **REST PARAMETERS** : allow us to pass an arbitrary number of parameters into a function, and use them into the function
+
+ ... same notation, the oposite of spread operator, 
+
+**spread operator**: we use it a funtion call as a parameter 
+**rest prameter**: is used in a function declaration to accept an arbitray number of parameters
 
 
-
-
-
-
-// FUNCTION PARAMETERS 
-
-// REST PARAMETERS : allow us to pass a arbitrary number of parameters into a function, and use them into the function
-
-// ... same notation, the oposite of spread operator, 
-
-// spread operator: we use it a funtion call
-// rest prameter: is uused in a funciton declaration to accept an arbitray number of parameters
-
-
-//ES5
+**ES5**
+```js
 function isFullAge5() {
-    // arguments is a special word to see the argumeens passed to a function
+    // arguments is a special word to see the arguments passed to a function
     // arguments it is not an array so if we need to use it as in array we need to change it to an array
-    console.log(arguments);
+    console.log(arguments); // 2010, 1999, 1965
     
     var argsArr = Array.prototype.slice.call(arguments);
     
@@ -495,13 +525,16 @@ function isFullAge5() {
 }
 
 
-/* isFullAge5(2010, 1999, 1965);
-isFullAge5(1990, 1999, 1965, 2016, 1987); */
+isFullAge5(2010, 1999, 1965);
+isFullAge5(1990, 1999, 1965, 2016, 1987); 
+```
 
 
-//ES6
-// As soon as we call the function it will take tha parameters and tranform them into a array
 
+**ES6**
+
+As soon as we call the function it will take tha parameters and tranform them into a array
+```js
 function isFullAge6(...years) {
     console.log(years); // [ 1990, 1999, 1965, 2016, 1987 ]
     years.forEach(cur => console.log( (2020 - cur) >= 18));
@@ -509,33 +542,16 @@ function isFullAge6(...years) {
 }
 
 isFullAge6(1990, 1999, 1965, 2016, 1987);
+```
 
 
 
-//ES5
-function isFullAge5() {
-    // arguments is a special word to see the argumeens passed to a function
-    // arguments it is not an array so if we need to use it as in array we need to change it to an array
-    console.log(arguments);
-    
-    var argsArr = Array.prototype.slice.call(arguments);
-    
-    argsArr.forEach(function(cur) {
-        console.log((2020 - cur) >= 18);
-    }) 
-}
-
-
-/* isFullAge5(2010, 1999, 1965);
-isFullAge5(1990, 1999, 1965, 2016, 1987); */
-
-
-
-
-//ES5
+Adding an extra parameter, that it two parameters for two different situations
+**ES5**
+```js
 function isFullAge5(limit) {
     console.log(arguments);
-    // slice cut a piece of aan array , (arguments, 1) exclude de 1º agumente, that is limit
+    // slice() cut a piece of an array , (arguments, 1) exclude de 1º agumente, that is limit
     var argsArr = Array.prototype.slice.call(arguments, 1);
     console.log(argsArr);
     argsArr.forEach(function(cur) {
@@ -543,28 +559,28 @@ function isFullAge5(limit) {
     })
 }
 
-//isFullAge5(16, 1990, 1999, 1965);
+isFullAge5(16, 1990, 1999, 1965);
+```
 
 
-//ES6
-function isFullAge6(limit,firtarg, ...years) {
-    console.log(limit);
-    console.log(firtarg);
-    console.log(years);
+**ES6**
+```js
+function isFullAge6(limit,...years) {
+    console.log(limit); // 16
+    console.log(years); // [1990, 1999, 1965, 2016, 1987]
     years.forEach(cur => console.log( (2016 - cur) >= limit));
 }
 
 isFullAge6(16, 1990, 1999, 1965, 2016, 1987);
+```
+![node list](assets/images/arguments-vs-array.png)
 
+### **Default parameters** when we want to preset the value of a parameter
 
+**ES5**
 
-
-
-
-
-// DEafult parameters when we want to preset the value of a parameter
-
-// ES5
+Values are specified inside the object constructor
+```js
 function SmithPerson(firstName, yearOfBirth, lastName, nationality) {
     
     lastName === undefined ? lastName = 'Smith' : lastName = lastName;
@@ -578,14 +594,17 @@ function SmithPerson(firstName, yearOfBirth, lastName, nationality) {
 }
 
 var john = new SmithPerson('John', 1990);
-// we are oinly specifing 2 values of the object, so when we console tthe jonh object the resutl will be that the nod defined values will be 'undefined'
-console.log(john);
+// we are only specifying 2 values of the object, so when we console the jonh object the resutl will be that the not defined values will be 'undefined'
+console.log(john); 
 
-// we cana stablish the values inside the object constructor as above
 var emily = new SmithPerson('Emily', 1983, 'Diaz', 'spanish');
 console.log(emily);
+```
 
-// ES6 Values are passed in the parameters
+**ES6**
+
+Values are specified and passed in the parameters
+```js
 function SmithPerson(firstName, yearOfBirth, lastName = 'Smith', nationality = 'american') {
     this.firstName = firstName;
     this.lastName = lastName;
@@ -595,3 +614,4 @@ function SmithPerson(firstName, yearOfBirth, lastName = 'Smith', nationality = '
 
 var mark = new SmithPerson('Mark', 1990);
 console.log(mark);
+```
