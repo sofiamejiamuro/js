@@ -615,3 +615,81 @@ function SmithPerson(firstName, yearOfBirth, lastName = 'Smith', nationality = '
 var mark = new SmithPerson('Mark', 1990);
 console.log(mark);
 ```
+
+
+## MAPS
+// Maps a data structure, new key value data structure, new built in type 
+
+// maaps create hash map
+
+const question = new Map();
+// console.log(question);
+
+// defining a key : value pair
+question.set('question', 'What is the official name of the latest major JavaScript version?');
+question.set(1, 'ES5');
+question.set(2, 'ES6');
+question.set(3, 'ES2015');
+question.set(4, 'ES7');
+question.set('correct', 3);
+question.set(true, 'Correct answer :D');
+question.set(false, 'Wrong, please try again!');
+// console.log(question);
+
+// pass the key
+// console.log(question.get('question'));
+/* console.log(question.size);
+
+
+if(question.has(4)) {
+    question.delete(4);
+    //console.log('Answer 4 is here')
+}
+
+if(question.has(2)) {
+    console.log('Answer 2 is here')
+} 
+
+console.log(question);
+*/
+// Delete all the elements
+//question.clear();
+
+// Unlike objects, maps are iterable
+// forEach(cuerrent, index, array) in a array
+// forEach(cuerrent value , current key, the map) in a map
+
+//question.forEach((value, key) => console.log(`This is ${key}, and it's set to ${value}`));
+
+// we cann uso for of as in arrays
+for (let key of question) {
+    // returns an array where key is 0 an value is 1
+   //console.log(key);
+}
+// entries() return entries of map
+for (let key of question.entries()) {
+    // returns an array where key is 0 an value is 1 as above
+   //console.log(key);
+}
+for (let [key] of question.entries()) {
+    // only the key not as an array
+   console.log(key);
+}
+for (let [key, value] of question.entries()) {
+    // key and value separtely
+   console.log(key);
+}
+
+ for (let [key, value] of question.entries()) {
+    if (typeof(key) === 'number') {
+        console.log(`Answer ${key}: ${value}`);
+    }
+ }
+
+ 
+const ans = parseInt(prompt('Write the correct answer'));
+console.log(question.get(ans === question.get('correct')));
+
+// we can use anythigns as key unlike objects that is only strings and integers
+// maps are iterable
+// Easily add or remove data
