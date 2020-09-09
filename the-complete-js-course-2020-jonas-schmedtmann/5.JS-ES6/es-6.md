@@ -618,14 +618,17 @@ console.log(mark);
 
 
 ## MAPS
-// Maps a data structure, new key value data structure, new built in type 
 
-// maaps create hash map
+Maps is a data structure, new key value data structure, new built in type 
 
+Maps create hash map
+
+```js
 const question = new Map();
-// console.log(question);
+```
 
-// defining a key : value pair
+Defining a key-value pair
+```js
 question.set('question', 'What is the official name of the latest major JavaScript version?');
 question.set(1, 'ES5');
 question.set(2, 'ES6');
@@ -634,62 +637,137 @@ question.set(4, 'ES7');
 question.set('correct', 3);
 question.set(true, 'Correct answer :D');
 question.set(false, 'Wrong, please try again!');
-// console.log(question);
 
-// pass the key
-// console.log(question.get('question'));
-/* console.log(question.size);
+console.log(question);
+```
+![map-structure](assets/images/map-structure.png)
 
+```js
 
+console.log(question.get('question')); // What is the official name of the latest major JavaScript version?
+console.log(question.size); // 8
+
+// To delete a element, we pass the key
+question.delete(4); 
+// We look on map to have the '4' key
+question.has(4)
+
+// Delete all the elements of the map
+question.clear();
 if(question.has(4)) {
-    question.delete(4);
-    //console.log('Answer 4 is here')
+  console.log('Answer 4 is here')
 }
 
 if(question.has(2)) {
     console.log('Answer 2 is here')
 } 
 
-console.log(question);
-*/
-// Delete all the elements
-//question.clear();
+```
+Unlike objects, maps are iterable
 
-// Unlike objects, maps are iterable
-// forEach(cuerrent, index, array) in a array
+as **forEach(cuerrent, index, array)** in a array
+
+```js
 // forEach(cuerrent value , current key, the map) in a map
+question.forEach((value, key) => console.log(`This is ${key}, and it's set to ${value}`));
+```
 
-//question.forEach((value, key) => console.log(`This is ${key}, and it's set to ${value}`));
-
-// we cann uso for of as in arrays
+we can uso **for of** as in arrays
+```js
 for (let key of question) {
-    // returns an array where key is 0 an value is 1
-   //console.log(key);
-}
-// entries() return entries of map
+  // returns an array where key is 0 an value is 1
+  console.log(key); // Array [ "correct", 3 ]
+} 
+ 
+ // entries() return entries of map
 for (let key of question.entries()) {
-    // returns an array where key is 0 an value is 1 as above
-   //console.log(key);
+  // returns an array where key is 0 an value is 1 as above
+  console.log(key); // Array [ "correct", 3 ]
 }
+
 for (let [key] of question.entries()) {
-    // only the key not as an array
-   console.log(key);
+  console.log(key); // correct
 }
+
 for (let [key, value] of question.entries()) {
-    // key and value separtely
-   console.log(key);
+  // key and value separtely
+  console.log(key, value); // correct 3
 }
 
  for (let [key, value] of question.entries()) {
     if (typeof(key) === 'number') {
         console.log(`Answer ${key}: ${value}`);
     }
- }
+ } 
 
  
 const ans = parseInt(prompt('Write the correct answer'));
 console.log(question.get(ans === question.get('correct')));
+```
 
-// we can use anythigns as key unlike objects that is only strings and integers
-// maps are iterable
-// Easily add or remove data
+We can use anythings as key unlike objects that is only strings and integers
+
+Maps are iterable
+
+Easily to add or remove data
+
+## CLASSES
+
+Make it easier to implement iheritance
+
+**In ES5 function contructores**
+
+**ES5**
+```js
+var Person5 = function(name, yearOfBirth, job) {
+    this.name = name;
+    this.yearOfBirth = yearOfBirth;
+    this.job = job;
+}
+
+Person5.prototype.calculateAge = function() {
+    var age = new Date().getFullYear() - this.yearOfBirth
+    console.log(age);
+}
+
+var john5 = new Person5('John', 1990, 'teacher');
+
+john5.calculateAge();
+```
+
+**ES6**
+
+All classes have to have a contructuor method
+```js
+class Person6 {
+
+    constructor (name, yearOfBirth, job) {
+        this.name = name;
+        this.yearOfBirth = yearOfBirth;
+        this.job = job;
+    }
+    
+    calculateAge() {
+        var age = new Date().getFullYear() - this.yearOfBirth;
+        console.log(age);
+    }
+    // static methods are attached to the class but are not inherited to the instances
+    static greeting() {
+        console.log('Hey there!');
+    }
+
+}
+
+// Creating an instance of the class
+const john6 = new Person6('John', 1990, 'teacher');
+
+Person6.greeting();
+// we can not using it in john so john6.greeting() won't work
+```
+
+Classes are not hoisted as function contructures are. 
+
+We can only add methods to classes but not properties
+
+## Classes with subclasses
+

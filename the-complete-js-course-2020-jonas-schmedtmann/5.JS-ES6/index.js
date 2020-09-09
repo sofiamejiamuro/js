@@ -1,50 +1,41 @@
-// CLASSES
-// Makei t easier to implement ih neritances
-//in es5 function contructores
+const question = new Map();
 
-
-//ES5
-var Person5 = function(name, yearOfBirth, job) {
-    this.name = name;
-    this.yearOfBirth = yearOfBirth;
-    this.job = job;
+question.set('question', 'What is the official name of the latest major JavaScript version?');
+question.set(1, 'ES5');
+question.set(2, 'ES6');
+question.set(3, 'ES2015');
+question.set(4, 'ES7');
+question.set('correct', 3);
+question.set(true, 'Correct answer :D');
+question.set(false, 'Wrong, please try again!');
+/* 
+console.log(question);
+console.log(question.get('question')); 
+console.log(question.size);
+ */
+/* for (let key of question) {
+    // returns an array where key is 0 an value is 1
+   console.log(key); // Array [ "correct", 3 ]
+} */
+ // entries() return entries of map
+for (let key of question.entries()) {
+    // returns an array where key is 0 an value is 1 as above
+  // console.log(key); // Array [ "correct", 3 ]
 }
 
-Person5.prototype.calculateAge = function() {
-    var age = new Date().getFullYear() - this.yearOfBirth
-    console.log(age);
+for (let [key] of question.entries()) {
+   //console.log(key); // correct
 }
 
-var john5 = new Person5('John', 1990, 'teacher');
-
-john5.calculateAge();
-
-//ES6
-// all classes have to has a contructuor method
-class Person6 {
-
-    constructor (name, yearOfBirth, job) {
-        this.name = name;
-        this.yearOfBirth = yearOfBirth;
-        this.job = job;
-    }
-
-    calculateAge() {
-        var age = new Date().getFullYear() - this.yearOfBirth;
-        console.log(age);
-    }
-    // static methods that are attached to the class but are not inherited to the instances
-    static greeting() {
-        console.log('Hey there!');
-    }
-
+for (let [key, value] of question.entries()) {
+    // key and value separtely
+   console.log(key, value); // correct 3
 }
 
-// Creating an instance of the class
-const john6 = new Person6('John', 1990, 'teacher');
+ for (let [key, value] of question.entries()) {
+    if (typeof(key) === 'number') {
+        console.log(`Answer ${key}: ${value}`);
+    }
+ } 
 
-Person6.greeting();
-// we can not using it in john so john6.greeting() wont work
-
-// Class are not hoisted as function contructures , 
-// we canonly add methdos to classes and no t porperties
+ 
