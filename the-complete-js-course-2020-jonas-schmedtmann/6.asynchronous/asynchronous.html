@@ -35,7 +35,7 @@
       })
     }
 // consume
-// chaining
+/* // chaining
     getIDs
     .then(IDs => {
       console.log('then',IDs);
@@ -52,6 +52,25 @@
     .catch(error => {
       console.log('error!',error);
     });
+ */
+ // Consume a promise using async/await
+ // 1º create a async function, means that the function is an asyn cfuntion, keeps running in the background
+  async function getRecipesAW() {
+  // Inside we can have one or more await expressions, await only can exist inside async function
+  // await the result of the promise
+    const IDs = await getIDs;
+    console.log(IDs);
+    const recipe = await getRecipe(IDs[2]);
+    console.log(recipe);
+    const related = await getRelated('Jonas');
+    console.log(related);
+
+    return recipe
+  }
+
+  // getRecipesAW();
+  // Consume aa promsise, beaacuse aa apromise it is returned
+  getRecipesAW().then(result => console.log(`${result} is the best ever!`));
 
   </script>
 </body>

@@ -110,7 +110,7 @@ If the event is succesful we call the **resolve** funciton otherway we call **re
 const getIDs = new Promise((resolve, reject) => {
   setTimeout(() => {
     // Calling the resolve function will mark the promise as fulfilled
-    // Resolve take one argument and is the result of the promise
+    // Resolve take one argument and is the result of the promise , the data
     resolve([523, 883, 432, 974]);
   }, 1500);
 });
@@ -119,63 +119,99 @@ const getIDs = new Promise((resolve, reject) => {
 
 There are two methods in all promises objects **then** and **chatch**
 
-**.then()** when the promise is fullfilled, that is, resolvedm. The argument of this method will be the result of the succesful promise.
+**.then( )** when the promise is fullfilled, that is, resolved. The argument of this method will be the result of the succesful promise.
 ```js
 getIDs
+// IDs == data
 .then(IDs => {
   console.log('then',IDs); // [523, 883, 432, 974]
 })
 ```
-**.catch ()**  allows us to have a handler in case our promise is rejected. Commonly we pass as an argument 'error'.
+**.catch( )**  allows us to have a handler in case our promise is rejected. Commonly we pass as an argument 'error'.
 ```js
 .catch(error =>{
   console.log('error!',error); // error
 })
 ```
-----
 
 
+Complete example
+```js
+const getIDs = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    resolve([523, 883, 432, 974]);
+  }, 1500);
+});
+```
+```js
+const getRecipe = recID => {
+  return new Promise((resolve, reject) => {
+    setTimeout(ID => {
+      const recipe = {title: 'Fresh tomato pasta', publisher: 'Jonas'};
+        resolve(`${ID}: ${recipe.title},${recipe.publisher}`);
+      }, 1500, recID);
+  })
+};
+```
+```js
+const getRelated = publisher => {
+  return new Promise ((resolve, reject) => {
+    setTimeout(pub => {
+      const recipe = {title: 'pizza', publisher: 'Jonas'};
+        resolve(`${recipe.title},${recipe.publisher}`);
+    }, 1000, publisher)
+  })
+}
+```
+**Chaining**
+```js
+getIDs
+.then(IDs => {
+  console.log('then',IDs);
+  // this   getRecipe(IDs[2])  will return a promise, that if resolve gives us the id and the recipe name
+  return getRecipe(IDs[2]) 
+})
+.then(recipe => {
+  console.log('recipe',recipe);
+  return getRelated(recipe.publisher)
+})
+.then(recipe => {
+  console.log(recipe);
+})
+.catch(error => {
+  console.log('error!',error);
+});
+```
 
-       // produce
-    const getIDs = new Promise((resolve, reject) => {
-      setTimeout(() => {
-        resolve([523, 883, 432, 974]);
-      }, 1500);
-    });
+IN ES8 2017 **async/await** was introduced, design to consume promises not to produce them
 
-    // produce
-    const getRecipe = recID => {
-      return new Promise((resolve, reject) => {
-        setTimeout(ID => {
-          const recipe = {title: 'Fresh tomato pasta', publisher: 'Jonas'};
-            resolve(`${ID}: ${recipe.title},${recipe.publisher}`);
-          }, 1500, recID);
-      })
-    };
+Consume a promise using **async/await**
 
-    const getRelated = publisher => {
-      return new Promise ((resolve, reject) => {
-        setTimeout(pub => {
-          const recipe = {title: 'pizza', publisher: 'Jonas'};
-            resolve(`${recipe.title},${recipe.publisher}`);
-        }, 1000, publisher)
-      })
-    }
-// consume
-// chaining
-    getIDs
-    .then(IDs => {
-      console.log('then',IDs);
-      // this   getRecipe(IDs[2])  will return a promise, that if resolve gives us the id and the recipe name
-      return getRecipe(IDs[2]) 
-    })
-    .then(recipe => {
-      console.log('recipe',recipe);
-      return getRelated(recipe.publisher)
-    })
-    .then(recipe => {
-      console.log(recipe);
-    })
-    .catch(error => {
-      console.log('error!',error);
-    });
+1º Create a async function, means that the function is an asyn funtion, keeps running in the background
+```js
+async function getRecipesAW() {
+// Inside we can have one or more await expressions, await only can exist inside async function
+// await the result of the promise
+  const IDs = await getIDs;
+  console.log(IDs);
+  const recipe = await getRecipe(IDs[2]);
+  console.log(recipe);
+  const related = await getRelated('Jonas');
+  console.log(related);
+
+  return recipe
+}
+
+  // getRecipesAW();
+  // Consume a promsise, beacuse a apromise is returned
+  getRecipesAW().then(result => console.log(`${result} is the best ever!`));
+```
+
+## AJAX and APIS
+
+Asynchronous Javascript and Xml
+
+![ajax](assets/images/ajax.png)
+
+![ajax-api](assets/images/ajax-api.png)
+
