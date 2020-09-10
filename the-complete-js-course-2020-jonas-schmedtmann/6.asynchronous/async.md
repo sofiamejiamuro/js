@@ -136,6 +136,7 @@ getIDs
 
 
 Complete example
+The difference between getIDs and recID is that for the first one it is defined the promise directly to de variable because it no need paramenters, and as getRecipe do need the promise is the return of the function
 ```js
 const getIDs = new Promise((resolve, reject) => {
   setTimeout(() => {

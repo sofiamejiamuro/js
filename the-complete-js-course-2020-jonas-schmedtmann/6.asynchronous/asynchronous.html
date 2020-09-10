@@ -9,69 +9,10 @@
 <body>
   <h1>Asynchronous JavaScript</h1>
   <script>
-    // produce
-    const getIDs = new Promise((resolve, reject) => {
-      setTimeout(() => {
-        resolve([523, 883, 432, 974]);
-      }, 1500);
-    });
+ 
 
-    // produce
-    const getRecipe = recID => {
-      return new Promise((resolve, reject) => {
-        setTimeout(ID => {
-          const recipe = {title: 'Fresh tomato pasta', publisher: 'Jonas'};
-            resolve(`${ID}: ${recipe.title},${recipe.publisher}`);
-          }, 1500, recID);
-      })
-    };
 
-    const getRelated = publisher => {
-      return new Promise ((resolve, reject) => {
-        setTimeout(pub => {
-          const recipe = {title: 'pizza', publisher: 'Jonas'};
-            resolve(`${recipe.title},${recipe.publisher}`);
-        }, 1000, publisher)
-      })
-    }
-// consume
-/* // chaining
-    getIDs
-    .then(IDs => {
-      console.log('then',IDs);
-      // this   getRecipe(IDs[2])  will return a promise, that if resolve gives us the id and the recipe name
-      return getRecipe(IDs[2]) 
-    })
-    .then(recipe => {
-      console.log('recipe',recipe);
-      return getRelated(recipe.publisher)
-    })
-    .then(recipe => {
-      console.log(recipe);
-    })
-    .catch(error => {
-      console.log('error!',error);
-    });
- */
- // Consume a promise using async/await
- // 1º create a async function, means that the function is an asyn cfuntion, keeps running in the background
-  async function getRecipesAW() {
-  // Inside we can have one or more await expressions, await only can exist inside async function
-  // await the result of the promise
-    const IDs = await getIDs;
-    console.log(IDs);
-    const recipe = await getRecipe(IDs[2]);
-    console.log(recipe);
-    const related = await getRelated('Jonas');
-    console.log(related);
-
-    return recipe
-  }
-
-  // getRecipesAW();
-  // Consume aa promsise, beaacuse aa apromise it is returned
-  getRecipesAW().then(result => console.log(`${result} is the best ever!`));
-
+ 
   </script>
 </body>
 </html>
