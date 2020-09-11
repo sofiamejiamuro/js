@@ -216,3 +216,92 @@ Asynchronous Javascript and Xml
 
 ![ajax-api](assets/images/ajax-api.png)
 
+## FETCH & PROMISES
+
+Use a web APi
+
+fetch('url where the api is as a string') 
+
+CORS -- Cross origin resource server
+Same origin policy , prevents a ajax request from a domain different from our own domain
+
+fetch returns the promise, could return o not the data,that is, resolved it or rejected it
+```js
+function getData(){
+  fetch('https://jsonplaceholder.typicode.com/posts')
+  .then(data => {
+    // daata readable steeam we have to be converted to json
+    console.log(data);
+    //.json() returns as well a promise
+    return data.json();
+  })
+  .then(dataJson => {
+    // The data ready to be used
+    console.log(dataJson);
+    const today = dataJson[0].userId;
+  })
+  .catch(error => {
+    console.log(error); 
+  })
+}
+getData();  
+```
+```js
+function getWeather(woeid) {
+  fetch(`https://crossorigin.me/https://www.metaweather.com/api/location/${woeid}/`)
+  .then(result => {
+    return result.json();
+  })
+  .then(data => {
+    const today = data.consolidated_weather[0];
+    console.log(`Temperatures today in ${data.title} stay between ${today.min_temp} and ${today.max_temp}.`);
+  })
+  .catch(error => console.log(error));
+}
+getWeather(2487956);
+getWeather(44418);
+```
+
+## ASYNC-AWAIT
+
+asyc, await to **consume** the promises in an easier way
+```js
+async function getWeatherAW() {
+  try{
+    // result se va a esperarse (awaita) a que se cumpla la promesa del fetch para llenarse
+    const result = await fetch('https://jsonplaceholder.typicode.com/posts');
+    // data is the resolved promised
+    const data = await result.json();
+    return x;
+  } catch (error){
+    console.log(error);
+  }
+}
+
+let test;
+getWeatherAW().then(x => {
+  test = x
+  console.log(test);
+})
+´´´
+´´´js
+async function getWeatherAW(woeid) {
+  try {
+    const result = await fetch(`https://crossorigin.me/https://www.metaweather.com/api/location/${woeid}/`);
+    const data = await result.json();
+    const tomorrow = data.consolidated_weather[1];
+    console.log(`Temperatures tomorrow in ${data.title} stay between ${tomorrow.min_temp} and ${tomorrow.max_temp}.`);
+    return data;
+  } catch(error) {
+      alert(error);
+  }
+}
+getWeatherAW(2487956);
+
+// Sacar la información
+let dataLondon;
+getWeatherAW(44418).then(data => {
+    dataLondon = data
+    console.log(dataLondon);
+});
+```
