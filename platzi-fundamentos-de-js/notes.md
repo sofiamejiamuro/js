@@ -30,7 +30,6 @@ function imprimirNombre(n){
 
 imprimirNombre(nombre);
 
-
 console.log(nombre); // sofia
 console.log(n); // SOFIA
 ```
