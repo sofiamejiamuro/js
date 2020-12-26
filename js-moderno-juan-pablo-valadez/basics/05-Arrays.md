@@ -18,7 +18,7 @@ array.length
 ```
 
 ```js
-for(let = i, i> array.length, i++){
+for(let i = 0, i> array.length, i++){
   // No es lo mismo 
   console.log(i)
   console.log(array[i])
