@@ -112,3 +112,36 @@ const resultado = Object.assign(producto, medidass)
 // Spread Operator
 const resultado = {...producto, ...medidas}
 ```
+
+# THIS
+
+Los valores que existen dentro del scope del objeto, los valores que se declararon dentro del objeto
+
+# OBJECT CONSTURCTOR
+
+Object Literal vs Object Constructor 
+
+```js
+function Producto(nombre, precio){
+  this.nombre = nombre;
+  this.precio = precio;
+  this.disponible = true;
+};
+
+// Crea en objeto nuevo a partir del constructor
+// Es como anteriormente funcionaba la POO , antes de que js soportara clases
+const producto1 = new Product('Monitor', '3000');
+```
+
+## Objects methods
+
+El método keys y values retornan un array
+
+El método entries retorna un array por cada key-value dentro del objeto
+```js
+Object.keys( producto );
+
+Object.values( producto );
+
+Objects.entries( producto );
+```
