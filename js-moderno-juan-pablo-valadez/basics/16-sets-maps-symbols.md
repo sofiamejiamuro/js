@@ -86,3 +86,45 @@ Se pueden rescribir los valores, también son iterables
 
 ## Weak Map
 
+No se puede conocer laextensión de un weakMap, tampoco iterar
+
+## Symbols
+
+Crea una propiedad única, no son iterables
+
+```js
+// Nunca son inguales
+
+const nombre = Symbol('Sofia');
+const apellido = Symbol('Mejia');
+
+const persona = {};
+
+// Agregar nombre y apellido como llaves del objeto, no permite notación de punto
+persona[nombre] = 'Sofia';
+persona[apellido] = 'Mejia';
+
+// Acceder a las propiedades,  no permite notación de punto
+console.log(persona[apellido])
+
+console.log(persona) 
+/*
+{
+  Symbol(): "sofia"
+  Symbol(): "Mejia"
+}
+*/
+
+// Descripción del Symbol
+
+const nombre = Symbol('Nombre del cliente');
+const persona = {};
+
+persona[nombre] = "Sofia"
+console.log(perona)
+/*
+{
+  Symbol(Nombre del cliente) : "Sofia"
+}
+*/ 
+```
