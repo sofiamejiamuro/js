@@ -8,7 +8,7 @@ IIFFE Immediatly Invoke function expressions
 <script src="cliente.js" type="module"></script>
 
 ```
-## Export 
+## Export / Import
 
 ```js
 export const nombreCliente = "sofia";
@@ -46,7 +46,7 @@ import { Cliente } from './cliente.js';
 
 Se podria hacer un archivo de puras clases o puras variables o puras funciones
 
-## Export Default
+## Export Default
 
 No requiere estar entre las llaves. Sólo puede existir un export default por archivo.
 
