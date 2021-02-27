@@ -218,3 +218,146 @@ case 'geminis':
 case 'Géminis':
   console.log('bla bla')
 ``` 
+
+# ARRAYS
+
+Es una misma forma de acceder a la propiedad de un objeto
+```js
+personas[0].altura
+persona[0]['altura']
+```
+
+**Array.filter**
+
+Filter puede recibir como parametro una función o ejecutarla ahi mismo 
+
+Filter retonra un arreglo con los items filtrados
+```js
+const esAlta = ({altura}) => altura > 1.8
+var personasAltas = personas.filter(esAlta) // No se necesita "llamar a la función", es decir, !esAlta()
+
+var personasAltas = personas.fiter(function ({altura}){return altura > 1.8})
+
+var personasAltas = personas.fiter(({altura}) => altura > 1.8)
+```
+
+**Array.map**
+
+.map() devuelve un nuevo array con los objetos modificados, es decir , se modifica la referencia, entonces si queremos un array sin modificar los objetos anteriores debemmos crear una nueva referencia
+
+```js
+// La acción que se va a ejecutar en cada item del array
+const pasarAlturaACms = persona => {
+  return {
+    ...persona,
+    atura: persona.altura * 100
+  }
+}
+
+// mejor:
+const pasarAlturaACms = persona => ({
+    ...persona,
+    atura: persona.altura * 100
+})
+
+// en esta funcion modificariamos la referencia original
+const pasarAlturaACms = persona => {
+  persona.altura * 100
+}
+
+/// map(), que nos devuelve un array de items modificados
+var personaCms = personas.map(pasarAlturaACms)
+```
+
+**Array.reduce**
+
+Reducir un array a un valor único
+
+Ej, tenemos un array con items , donde cada item es una persona, una de las propiedades es la cantidad de libros que tiene, se usa una función reductora para obtener la cantidad de libros en total
+
+```js
+ // se debe retornar la modificación del acumulador
+const reducer = (acumulador, {cantidadDeLibros}) => acum + cantidadDeLibros
+
+// reduce(la función reductora, el acumulador: el valor inicial para contar los libros en este caso)
+
+var totalDeLibros = personas.reduce(reducer, 0 )
+```
+
+# PROGRAMACIÓN ORIENTADA A OBJETOS
+
+Las classes en js son protoypos
+
+¿cómo se hace un prototypo?
+
+new es una palabra reservada que se usa para cear nuevos objetos dado un prototipo
+
+```js
+function Persona(nombre, apellido){
+  // This va a hacer referencia al objeto que se está construyendo
+  this.nombre = nombre,
+  this.apellido = apellido
+  // implicitamente hay un return this 
+}
+
+Persona.prototype.saludar = function (){
+  console.log(`hola me llamo ${this.nombre} ${this.apellido}`)
+}
+const sofia = new Persona('Sofia', 'Mejia')
+
+console.log(sofia)
+// Persona es el prototype 
+// Persona { nombre:'Sofia', apellido:'Mejia'}
+
+const ricardo = new Persona('Ricardo','Lego')
+ricardo.saludar()
+
+
+```
+
+# ARROW FUNCTIONS
+
+```js
+Persona.protoype.soyAlto = function() {
+  // Aquí el this sí hace referencia al prototype Persona
+  return this.altura > 1.8 // true or false
+}
+
+Persona.protoype.soyAlto = () => {
+  // Aquí this hace referencia al objeto global widow
+  return this.altura > 1.8
+}
+```
+
+## Herencia
+
+Herencia prototipal
+
+# CLASSES
+
+Por debajo todos son prototipos
+
+```js
+class Persona {
+  // Método constructor
+  constructor(nombre, apellido, altura){
+    this.nombre = nombre,
+    this.apellido = apellido,
+    this.altura = altura
+  }
+  saludar(){
+     console.log(`hola me llamo ${this.nombre} ${this.apellido}`)
+  }
+}
+
+// Herencia
+class Desarrollador extends Persona {
+  constructor(nombre, apellido, altura){
+    super(nombre, apellido, altura)
+  }
+
+}
+
+var sofia  = new Persona('Sofia', 'Mejia', 1.57)
+
+```
