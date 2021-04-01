@@ -75,3 +75,28 @@ Holds the status of the XMLHttpRequest.
 ## Promesas
 
 ECMA Script 6
+
+## Async / await
+
+Es importante notar que una de las diferencias entre async y await y las promesas es el scope, mientras que en una promesa se quedan restringidas al scope de then, en el async/await como se asigna a una connstante se podria decir que su scope es más amplio, según sea el caso
+
+
+## Ventajas y desventajas entre estos tres métodos
+
+**Callbacks**
+
+PROS: Corren en cualquier navegador
+
+CONS: Anidación
+
+**Promises**
+
+PROS: Se enlazan, es mñas sencillo de leer
+
+CONS: Sólo existe un catch al final, requiere de transpilador para funcionar en los navegadores, scope
+
+**Async/Await**
+
+PROS: manejo de excepciones, scope
+
+CONS: Tamnbién requiere de transpilación

@@ -16,8 +16,6 @@ somethingWillHappen()
   .then(resp => console.log(resp))
   .catch(err => console.log(err))
 
-
-
 const somethingWillHappen2 = () => {
   return new Promise((resolve, reject) => {
     if(true){
@@ -34,3 +32,16 @@ const somethingWillHappen2 = () => {
 somethingWillHappen2()
   .then(resp => console.log(resp))
   .catch(err => console.log(err))
+
+// Promesas encadenas usando promise.all() cuyos parametros son las promesas a ejecutar
+Promise.all([somethingWillHappen(), somethingWillHappen2()])
+  .then(resp => {
+    // La respuesta va a ser un arreglo de respuestas
+    console.log(resp)
+  })
+  .catch(err => {
+    console.log(err)
+  })
+
+
+// Al ejecutar las dos promesas con el método Promise.all(), la respuesta llega al mismo tiempo, a diferencia de ejecutarlas por separado  
