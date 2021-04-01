@@ -1,0 +1,16 @@
+{
+  "name": "asincronismo-js-platzi",
+  "version": "1.0.0",
+  "description": "learning about asynchronism in JS",
+  "main": "src/index.js",
+  "scripts": {
+    "callback": "node src/callback/index.js",
+    "callback:challenge": "node src/callback/challenge.js",
+    "promise":"node src/promises/index.js"
+  },
+  "author": "Sofia Mejia",
+  "license": "MIT",
+  "dependencies": {
+    "xmlhttprequest": "^1.8.0"
+  }
+}
