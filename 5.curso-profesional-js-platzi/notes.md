@@ -219,3 +219,220 @@ const angela = new Person('Angela');
 ```
 
 ## CALL, APPLY & BIND
+
+Son métodos del protoypo de function que nos sirven para asignar directamente el contexto de **this** 
+
+
+**CALL**
+
+Call y apply llaman la función inmediatamente
+
+```js
+// En esta función el this hace referencia al objeto global window porque es el objeto en el que se estña ejecutando la función
+function saludar(){
+  console.log(`hola soy ${this.name} ${this.apellido}`)
+};
+
+const richard = {
+  name: 'Gabriel',
+  apellido: 'Kauffman'
+};
+
+// Cuando mando llamar la función y le aplico el meteodo call el promer argumento de este metodo es el this al que queremos referenciar, entonces estoy cambiando de referencia, del objeto global window al objeto richard
+saludar.call(richard);
+
+// Cuando la función requiere argumentos
+function caminar(metros, direccion){
+  console.log(`${this.name} camina ${metros} metros hacia ${direccion}.`)
+};
+
+caminar.call(richard, 400, 'norte');
+``` 
+
+**APLY**
+
+Funciona igual que call pero se pasan los argumentos de forma distinta, ejemplo si necesitamos pasar una lista como argumentos
+
+```js
+function caminar(metros, direccion){
+  console.log(`${this.name} camina ${metros} metros hacia ${direccion}.`)
+};
+
+caminar.apply(richard, [800, 'sur']);
+
+const valores = [800, 'sur']
+caminar.apply(richard, valores);
+```
+
+**BIND**
+
+Bind construye una nueva función con el this nuevo ya integrado
+
+```js
+const daniel = {
+  name: 'Daniel',
+  apellido: 'Sanchez'
+};
+
+const danielSaluda = saludar.bind(daniel)
+danielSaluda()
+
+const danielCamina = caminar.bind(daniel)
+danielCamina(1000, 'este')
+
+const danielCamina = caminar.bind(daniel,2000,'sur')
+danielCamina()
+
+// curing = guarda parcialmente los argumentos y depues se mandan los demas
+const danielCamina = caminar.bind(daniel,500)
+danielCamina('noroeste')
+```
+
+Ejemplo de uso
+
+Si  atraves de un getElementsByClassName obtenemos una NodeList no vamos a poder acceder a los metodos que tiene un Array, por ejemplo un forEach, entonces podemos mandar llamar la funcion de los arrays y pasarle como this la NodeLits
+
+```js
+Array.prototype.forEach.call(buttons, button => {
+  button.onclick = () => alert('Nunca pares de aprender')
+});
+```
+
+## Prototype
+
+En JS todo son objetos, no hay clases. 
+
+```js
+// Es ineficiente crar asi cada uno de los heroes
+const zelda = {
+  name: 'Zelda'
+};
+
+zelda.saludar = function(){
+  console.log(`Hola soy ${this.name}`)
+};
+
+zelda.saludar();
+
+
+const link = {
+  name: 'Link'
+};
+
+link.saludar = function(){
+  console.log(`Hola soy ${this.name}`)
+};
+
+link.saludar();
+```
+
+```js
+// Una función que ayude a crear a los heroes de una forma más eficiente
+function Hero(name){
+  const hero = {
+    name: name
+  };
+
+// Es inefieicente estar creado esta funcion en cada objeto 
+  hero.saludar = function(){
+    console.log(`Hola soy ${this.name}`)
+  };
+
+  return hero
+};
+
+const zelda = Hero('Zelda');
+zelda.saludar();
+```
+
+```js
+const heroMethods = {
+  saludar: function(){
+    console.log(`Hola soy ${this.name}`)
+  };
+};
+
+function Hero(name){
+  const hero = {
+    name: name
+  };
+  hero.saludar = heroMethods.saludar;
+  return hero
+};
+
+const zelda = Hero('Zelda');
+zelda.saludar();
+```
+
+```js
+// Este metodo crea un nuevo objeto
+const heroMethods = {
+  saludar: function(){
+    console.log(`Hola soy ${this.name}`)
+  };
+};
+
+function Hero(name){
+  const hero = Object.create(heroMethods);
+  hero.name = name
+  return hero
+};
+
+const zelda = Hero('Zelda');
+zelda.saludar();
+```
+
+```js
+function Hero(name){
+  const hero = Object.create(Hero.prototype);
+  hero.name = name
+  return hero
+};
+
+Hero.prototype.saludar =  function(){
+  console.log(`Hola soy ${this.name}`)
+};
+
+const zelda = Hero('Zelda');
+zelda.saludar();
+```
+
+```js
+// Azucar Sintactica
+function Hero(name){
+  this.name = name
+};
+
+Hero.prototype.saludar =  function(){
+  console.log(`Hola soy ${this.name}`)
+};
+
+const zelda = new Hero('Zelda');
+zelda.saludar();
+```
+
+## HERENCIA PROTOTYPAL
+
+\__proto__
+
+```js
+function Hero(name){
+  this.name = name
+};
+
+Hero.prototype.saludar =  function(){
+  console.log(`Hola soy ${this.name}`)
+};
+
+const zelda = new Hero('Zelda');
+
+console.log('Name:', zelda.name) // Name: Zelda
+console.log('Saludar:', zelda.saludar) //  function
+console.log('toString:', zelda.toString) // toString() 
+
+// hasOwnProperty revisa si el elemento es del objeto o lo hereda
+console.log(zelda.hasOwnProterty('name')) // true
+
+console.log(zelda.hasOwnProterty('saludar')) // false
+```
+
