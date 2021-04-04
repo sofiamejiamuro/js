@@ -222,7 +222,6 @@ const angela = new Person('Angela');
 
 Son métodos del protoypo de function que nos sirven para asignar directamente el contexto de **this** 
 
-
 **CALL**
 
 Call y apply llaman la función inmediatamente
@@ -435,4 +434,5 @@ console.log(zelda.hasOwnProterty('name')) // true
 
 console.log(zelda.hasOwnProterty('saludar')) // false
 ```
+
 
