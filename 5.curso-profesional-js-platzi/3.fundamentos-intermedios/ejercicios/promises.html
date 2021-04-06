@@ -1,9 +1,21 @@
-# Fundamentos Intermedios
+<html>
+  <head>
+    <title>Promesas</title>
+  </head>
 
-## Promesas
+  <body>
+    <a href="/ejercicios/">Go back</a>
 
-```js
- // Ejemplo: renderMovies([{ title: "Spider-Man", release_date: "2019-06-30", poster_path: "/rjbNpRMoVvqHmhmksbokcyCr7wn.jpg" }])
+    <ul>
+      <li><button id="sequence">Get Top Movies in Sequence</button></li>
+      <li><button id="parallel">Get Top Movies in Parallel</button></li>
+      <li><button id="fastest">Get Fastest Top Movie</button></li>
+    </ul>
+
+    <ul id="movies"></ul>
+
+    <script>
+      // Ejemplo: renderMovies([{ title: "Spider-Man", release_date: "2019-06-30", poster_path: "/rjbNpRMoVvqHmhmksbokcyCr7wn.jpg" }])
       // Traducir las funciones de usar thens a usar async/await
       // Crear función para que no nos gastemos la cantidad de requests demasiado rapido
       // Crear función donde hacemos requests secuenciales
@@ -74,7 +86,7 @@
         const ids = await getTopMoviesIds();
         const moviePromises = ids.map(id => getMovie(id));
 
-        // Espera a que todas las promesas se resuelvan:
+        // Espera a que todas las promesas se resuelvan
         const movies = await Promise.all(moviePromises);
 
         return movies;
@@ -102,12 +114,6 @@
         const movie = await getFastestTopMovie();
         renderMovies([movie]);
       };
-
-```
-
-
-## Getters y Setters
-
-Son un nuevo feature pero no son tan utilizados.
-
-Funciones dentro de objetos que nos permiten tener propiedasdes virtuales.
+    </script>
+  </body>
+</html>
