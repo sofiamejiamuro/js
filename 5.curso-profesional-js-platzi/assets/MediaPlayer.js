@@ -20,13 +20,25 @@ function MediaPlayer(config){
 
 MediaPlayer.prototype._initPlugins = function(){
   console.log('inicializando plugins')
+  const player = {
+    play: () => this.play(),
+    pause: () => this.pause(),
+    media: this.media,
+    get muted() {
+      return this.media.muted;
+    },
+    set muted(value) {
+      this.media.muted = value;
+    },
+  };
+
   this.plugins.forEach(plugin => {
     // Donde this es el objeto instanciado media player, con sus elementos y metodos
     // console.log('plugin', plugin);
     // console.log('plugin', plugin.run);
     // console.log('plugin', plugin.run(this.media)); // no necesito pasarale especiuficamente media porque el metodo lo resuelve
     plugin.run(this);
-    console.log('this',this);
+    // console.log('this',this);
   });
 };
 
@@ -50,12 +62,6 @@ MediaPlayer.prototype.mute = function(){
 
 MediaPlayer.prototype.unmute = function(){
   this.media.muted = false;
-};
-
-MediaPlayer.prototype.toggleMute = function(){
-  this.media.muted
-  ? this.unmute()
-  : this.mute()
 };
 
 export default MediaPlayer;
